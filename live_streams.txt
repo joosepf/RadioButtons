@@ -1,0 +1,12 @@
+
+ stream_data[0]: "http://striiming.trio.ee/elmar.mp3|Raadio Elmar|Pop|EST|128|1"
+ stream_data[1]: "http://striiming.trio.ee:8008/myhits.mp3|Raadio Uuno|Rock|EST|128|1"
+ stream_data[2]: "http://www.netiraadio.ee:8000/teistsugune|Netiraadio - Teistsugne|Alternative rock|EST|128|1"
+ stream_data[3]: "http://87.110.219.34:8000/spinmp3|Spin FM|Pop|EST|128|1"
+ stream_data[4]: "http://skyplus.babahhcdn.com/SKYPLUS|SkyPlus|Pop|EST|128|1"
+ stream_data[5]: "http://icecast.err.ee:80/raadio2.mp3|Raadio 2|Pop|EST|128|1"
+ stream_data[6]: "http://nrj.babahhcdn.com/NRJ|NRJ Estonia|Dance|EST|128|1"
+ stream_data[7]: "http://retro.babahhcdn.com/RETRO|Retro FM|Oldies|EST|128|1"
+ stream_data[8]: "http://icecast.err.ee/raadio2.mp3|ERR Raadio 2|Various|EST|128|1"
+ stream_data[9]: "http://icecast.err.ee/raadio4madal.mp3|Raadio 4|Various|EST|128|1"
+ 
