@@ -14,21 +14,21 @@ class Buttons(Enum):
     RADIO8 = 7
     RADIO9 = 8
     PLAYER = 9
-    PAUS = auto()
-    MINIMIZE = auto()
-    STOP = auto()
-    SOUND = auto()
+    PAUS = 10
+    MINIMIZE = 11
+    STOP = 12
+    SOUND = 13
 
 radioImages = []
 radioLinks = []
 
 #Read files and links
 try:  
-    with open("source.txt", "r") as source:
+    with open("1source.txt", "r") as source:
         a = 0
         for line in source:
             name, link = line.strip().split(',', 1)    
-            radioImages.append(f"imgs/{name}")
+            radioImages.append(f"1imgs/{name}")
             radioLinks.append(link)
 except:
     print("Couldn't find source file. Exiting.....")
@@ -72,14 +72,13 @@ minimized = False
 prevButton = Buttons.RADIO1.value
 prevRadio = Buttons.RADIO1.value
 media = instance.media_new(radioLinks[prevButton])
+player.set_media(media)
 
 while True:
     if minimized:
         event, values = smallWindow.read()
     else:
         event, values = bigWindow.read()
-    player.audio_set_volume(int(values[Buttons.SOUND.value]))
-
     if event == Buttons.MINIMIZE.value:
         if minimized:
             bigWindow.UnHide()
@@ -88,12 +87,14 @@ while True:
             smallWindow.UnHide()
             bigWindow.Hide()
         minimized = not minimized
-    elif event in range (Buttons.RADIO1.value, Buttons.RADIO9.value):
+    elif event == Buttons.SOUND.value:
+        player.audio_set_volume(int(values[Buttons.SOUND.value]))
+    elif event in range (Buttons.RADIO1.value, Buttons.PLAYER.value):
         prevRadio = event
         media = instance.media_new(radioLinks[event])
         player.set_media(media)
         player.play()
-        bigWindow[Buttons.PAUS.value].Update(button_color=('#FFFFFF', '#283b5b'))    
+        #bigWindow[Buttons.PAUS.value].Update(button_color=('#FFFFFF', '#283b5b'))    
     elif event == Buttons.PLAYER.value:
         os.startfile (radioLinks[Buttons.PLAYER.value])
         break
@@ -102,9 +103,8 @@ while True:
     elif Buttons.PAUS.value:
         if prevButton == Buttons.PAUS.value:
             player.play()
-            bigWindow[Buttons.PAUS.value].Update(button_color=('#FFFFFF', '#283b5b'))    
+            smallWindow[Buttons.PAUS.value].Update(button_color=('#FFFFFF', '#283b5b')) 
             event = prevRadio
-            prevButton = Buttons.PAUS.value
         else:
             player.stop()
             smallWindow[Buttons.PAUS.value].Update(button_color=('#FFFFFF', 'yellow'))
@@ -114,7 +114,7 @@ while True:
        bigWindow[prevButton].Update(button_color=('#FFFFFF', '#283b5b'))    
        bigWindow[event].Update(button_color=('#FFFFFF', 'yellow'))
     
-    if event != Buttons.SOUND.value:
+    if event != Buttons.SOUND.value and event != Buttons.MINIMIZE.value:
         prevButton = event
         
 player.stop()
