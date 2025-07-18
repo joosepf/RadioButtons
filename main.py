@@ -24,11 +24,11 @@ radioLinks = []
 
 #Read files and links
 try:  
-    with open("1source.txt", "r") as source:
+    with open("source.txt", "r") as source:
         a = 0
         for line in source:
             name, link = line.strip().split(',', 1)    
-            radioImages.append(f"1imgs/{name}")
+            radioImages.append(f"imgs/{name}")
             radioLinks.append(link)
 except:
     print("Couldn't find source file. Exiting.....")
