@@ -88,7 +88,12 @@ while True:
             bigWindow.Hide()
         minimized = not minimized
     elif event == Buttons.SOUND.value:
-        player.audio_set_volume(int(values[Buttons.SOUND.value]))
+        soundLevel = int(values[Buttons.SOUND.value])
+        player.audio_set_volume(soundLevel)
+        if minimized:
+            bigWindow[Buttons.SOUND.value].update(soundLevel)
+        else:
+            smallWindow[Buttons.SOUND.value].update(soundLevel)
     elif event in range (Buttons.RADIO1.value, Buttons.PLAYER.value):
         prevRadio = event
         media = instance.media_new(radioLinks[event])
