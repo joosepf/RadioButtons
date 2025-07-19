@@ -1,4 +1,4 @@
-import PySimpleGUI as sg
+import FreeSimpleGUI as sg
 import vlc
 import os
 from enum import Enum, auto
@@ -24,11 +24,11 @@ radioLinks = []
 
 #Read files and links
 try:  
-    with open("source.txt", "r") as source:
+    with open("1source.txt", "r") as source:
         a = 0
         for line in source:
             name, link = line.strip().split(',', 1)    
-            radioImages.append(f"imgs/{name}")
+            radioImages.append(f"1imgs/{name}")
             radioLinks.append(link)
 except:
     print("Couldn't find source file. Exiting.....")
