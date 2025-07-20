@@ -75,6 +75,8 @@ jazz_vibes.png,http://stream.example.com:8000/jazz
 - `<image_filename>` must match a file under the `imgs/` directory
 - `<stream_url>` is the direct URL to the audio stream
 
+All images must be .png or .gif format. for the first six stations logos must have maximum resolution of 84x84 and others are 60x60.(Oversized images will only have the top left corner displayed)
+
 ---
 
 ## Usage
