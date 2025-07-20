@@ -1,7 +1,7 @@
 import FreeSimpleGUI as sg
 import vlc
 import os
-from enum import Enum, auto
+from enum import Enum
 
 class Buttons(Enum):
     RADIO1 = 0
@@ -24,11 +24,10 @@ radioLinks = []
 
 #Read files and links
 try:  
-    with open("1source.txt", "r") as source:
-        a = 0
+    with open("source.txt", "r") as source:
         for line in source:
             name, link = line.strip().split(',', 1)    
-            radioImages.append(f"1imgs/{name}")
+            radioImages.append(f"imgs/{name}")
             radioLinks.append(link)
 except:
     print("Couldn't find source file. Exiting.....")
@@ -79,6 +78,7 @@ while True:
         event, values = smallWindow.read()
     else:
         event, values = bigWindow.read()
+
     if event == Buttons.MINIMIZE.value:
         if minimized:
             bigWindow.UnHide()
@@ -95,17 +95,11 @@ while True:
         else:
             smallWindow[Buttons.SOUND.value].update(soundLevel)
     elif event in range (Buttons.RADIO1.value, Buttons.PLAYER.value):
-        prevRadio = event
         media = instance.media_new(radioLinks[event])
         player.set_media(media)
         player.play()
-        #bigWindow[Buttons.PAUS.value].Update(button_color=('#FFFFFF', '#283b5b'))    
-    elif event == Buttons.PLAYER.value:
-        os.startfile (radioLinks[Buttons.PLAYER.value])
-        break
-    elif event == sg.WIN_CLOSED or event == Buttons.STOP.value:
-        break
-    elif Buttons.PAUS.value:
+        prevRadio = event
+    elif event == Buttons.PAUS.value:
         if prevButton == Buttons.PAUS.value:
             player.play()
             smallWindow[Buttons.PAUS.value].Update(button_color=('#FFFFFF', '#283b5b')) 
@@ -113,14 +107,18 @@ while True:
         else:
             player.stop()
             smallWindow[Buttons.PAUS.value].Update(button_color=('#FFFFFF', 'yellow'))
+    elif event == Buttons.PLAYER.value:
+        os.startfile (radioLinks[Buttons.PLAYER.value])
+        break
+    elif event == sg.WIN_CLOSED or event == Buttons.STOP.value:
+        break
 
             
     if event != Buttons.SOUND.value and event != Buttons.MINIMIZE.value:
-       bigWindow[prevButton].Update(button_color=('#FFFFFF', '#283b5b'))    
-       bigWindow[event].Update(button_color=('#FFFFFF', 'yellow'))
-    
-    if event != Buttons.SOUND.value and event != Buttons.MINIMIZE.value:
+        bigWindow[prevButton].Update(button_color=('#FFFFFF', '#283b5b'))    
+        bigWindow[event].Update(button_color=('#FFFFFF', 'yellow'))
         prevButton = event
+
         
 player.stop()
 smallWindow.close()
